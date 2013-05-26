@@ -1,7 +1,8 @@
 # Joseph Malandruccolo
 # Lab 2 - CSPP 51050
 
-class String_Frequency_Counter
+# => abstract superclass that counts the frequency of characters in a string
+class StringFrequencyCounter
 
 	def new
 		raise "Abstract class cannot be instantiated"
@@ -17,7 +18,7 @@ end
 
 
 # => class that is capable of counting the frequency of ascii characters in a string
-class Ascii_Counter < String_Frequency_Counter
+class AsciiCounter < StringFrequencyCounter
 
 	# => return a hashmap of character frequencies
 	def frequency str
@@ -34,7 +35,7 @@ end
 
 
 # => class that is capable of counting the frequency of unicode characters
-class Unicode_Counter < String_Frequency_Counter
+class UnicodeCounter < StringFrequencyCounter
 
 	# => return a hashmap of character frequencies i.e. 104 => 3 is a count of 3
 	def frequency str

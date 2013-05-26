@@ -2,7 +2,8 @@
 # Lab 2 - CSPP 51050
 require_relative 'string_counters'
 
-class Server_Proxy
+# => class that receives a message from a broker and takes indicated action
+class StringServerProxy
 
 	attr_accessor :ascii_object, :unicode_object
 
@@ -21,8 +22,8 @@ class Server_Proxy
 
 	def initialize
 
-		@ascii_object = Ascii_Counter.new
-		@unicode_object = Unicode_Counter.new
+		@ascii_object = AsciiCounter.new
+		@unicode_object = UnicodeCounter.new
 		
 	end
 
