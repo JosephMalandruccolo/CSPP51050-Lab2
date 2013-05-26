@@ -8,5 +8,6 @@ cm.type = CallMessage::ASCII_TYPE
 cm.value = "hello"
 
 sb = ServerBroker.new
-stream = sb.byte_stream_from_call_message cm
-rm = sb.call_message_from_byte_stream stream
+bytes = sb.byte_stream_from_call_message cm
+response = sb.route_call_message_from_byte_stream bytes
+puts response.result

@@ -1,19 +1,12 @@
 # Joseph Malandruccolo
 # Lab 2 - CSPP 51050
 require_relative 'string_counters'
+require_relative 'call_message'
 
 # => class that receives a message from a broker and takes indicated action
 class ServerProxy
 
-	attr_accessor :ascii_object, :unicode_object
-
-	# => constants
-	ASCII_TYPE = "ascii"
-	UNICODE_TYPE = "unicode"
-
-
 	# => singleton code & initialization
-
 	def self.instance
 		@@shared_instance ||= new
 	end
@@ -30,23 +23,23 @@ class ServerProxy
 
 	# => public api
 	# => process the broker's message by choosing the correct server to process the request
-	def process_broker_message standard_input
+	def process_broker_message call_message
 
-		string_type = standard_input[:type]
-		string_value = standard_input[:value]
+		string_type = call_message.type
+		string_value = call_message.value
 
-		if string_type.eql? ASCII_TYPE
-			response = @ascii_object.frequency string_value
+		if string_type.eql? CallMessage::ASCII_TYPE
+			call_message.result = @ascii_object.frequency string_value
 
-		elsif string_type.eql? UNICODE_TYPE
-			response = @unicode_object.frequency string_value
+		elsif string_type.eql? CallMessage::UNICODE_TYPE
+			call_message.result = @unicode_object.frequency string_value
 
 		else
 			raise "invalid string type"
 
 		end
-		
-		response
+
+		call_message
 
 	end
 end

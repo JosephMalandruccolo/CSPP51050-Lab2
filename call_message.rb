@@ -12,7 +12,7 @@ class CallMessage
 
 
 	# => PROPERTIES
-	attr_accessor :value
+	attr_accessor :value, :result
 	attr_reader :type
 
 

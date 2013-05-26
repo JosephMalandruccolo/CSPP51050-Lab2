@@ -1,6 +1,8 @@
 # Joseph Malandruccolo
 # Lab 2 - CSPP 51050
 
+require_relative 'proxies'
+
 # => abstract super class broker
 class Broker
 
@@ -34,8 +36,15 @@ end
 
 class ServerBroker < Broker
 
-	
+	def initialize
+		@server_proxy = ServerProxy.instance
+	end
 
+
+	# => given a byte stream, forward a call message to the server proxy
+	def route_call_message_from_byte_stream stream
+		@server_proxy.process_broker_message(call_message_from_byte_stream(stream))
+	end
 
 
 
