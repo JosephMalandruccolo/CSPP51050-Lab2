@@ -80,7 +80,5 @@ class ClientProxy
 			return CallMessage::UNICODE_TYPE
 		end
 	end
-
-
-
+	
 end
