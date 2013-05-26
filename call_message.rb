@@ -15,6 +15,10 @@ class CallMessage
 	attr_accessor :value, :result
 	attr_reader :type
 
+	def initialize type, value
+		@type = type
+		@value = value
+	end
 
 	def type= t
 

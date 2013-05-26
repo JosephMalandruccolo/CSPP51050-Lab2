@@ -48,16 +48,39 @@ end
 # => class that receives a message from a client and forwards a CallMessage to the client broker
 class ClientProxy
 
-	# => singleton code & initialization
-	def self.instance
-		@@shared_instance ||= new
+
+	def initialize client_broker
+		@client_broker = client_broker
 	end
 
-	private_class_method :new
 
-	
+	# => public api
+	def character_frequency(str)
+		string_type = determine_type str
+		call_message = CallMessage.new(string_type, str)
+		@client_broker.invoke_message(call_message)
+	end
+
+
+	# => return call message constant for unicode or ascii
+	def determine_type str
+
+		encoding_options = {
+			:invalid           => :replace,  # Replace invalid byte sequences
+    		:undef             => :replace,  # Replace anything not defined in ASCII
+    		:replace           => ''        # Use a blank for those replacements
+  
+		}
+
+		str_without_unicode = str.encode(Encoding.find('ASCII'), encoding_options)
+
+		if str.length == str_without_unicode.length
+			return CallMessage::ASCII_TYPE
+		else
+			return CallMessage::UNICODE_TYPE
+		end
+	end
+
+
 
 end
-
-
-
