@@ -33,7 +33,7 @@ class Broker
 end
 
 
-
+# => broker that interacts with the a client broker and server proxy
 class ServerBroker < Broker
 
 	def initialize
@@ -42,10 +42,31 @@ class ServerBroker < Broker
 
 
 	# => given a byte stream, forward a call message to the server proxy
+	# => the result is a call message with its result attribute set
 	def route_call_message_from_byte_stream stream
 		@server_proxy.process_broker_message(call_message_from_byte_stream(stream))
 	end
 
+end
 
+
+# => broker that interacts with a client proxy and server broker
+class ClientBroker < Broker
+
+	def transport_call_message_to_broker call_message, server_broker
+		byte_stream = byte_stream_from_call_message( call_message )
+		server_broker.route_call_message_from_byte_stream( byte_stream )
+	end
 
 end
+
+
+
+
+
+
+
+
+
+
+

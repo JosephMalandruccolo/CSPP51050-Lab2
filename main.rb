@@ -7,7 +7,9 @@ cm = CallMessage.new
 cm.type = CallMessage::ASCII_TYPE
 cm.value = "hello"
 
+cb = ClientBroker.new
 sb = ServerBroker.new
-bytes = sb.byte_stream_from_call_message cm
-response = sb.route_call_message_from_byte_stream bytes
-puts response.result
+
+response_message = cb.transport_call_message_to_broker cm, sb
+
+puts response_message.result

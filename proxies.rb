@@ -43,3 +43,21 @@ class ServerProxy
 
 	end
 end
+
+
+# => class that receives a message from a client and forwards a CallMessage to the client broker
+class ClientProxy
+
+	# => singleton code & initialization
+	def self.instance
+		@@shared_instance ||= new
+	end
+
+	private_class_method :new
+
+	
+
+end
+
+
+
