@@ -17,6 +17,4 @@ def setup
 end
 
 client = setup
-response = client.character_frequency "hello\u0639"
-
-puts response.result
+puts client.character_frequency "hello"

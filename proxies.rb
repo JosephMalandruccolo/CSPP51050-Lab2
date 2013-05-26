@@ -58,7 +58,10 @@ class ClientProxy
 	def character_frequency(str)
 		string_type = determine_type str
 		call_message = CallMessage.new(string_type, str)
-		@client_broker.invoke_message(call_message)
+		response_message = @client_broker.invoke_message(call_message)
+
+		response_message.result
+		
 	end
 
 
@@ -80,5 +83,5 @@ class ClientProxy
 			return CallMessage::UNICODE_TYPE
 		end
 	end
-	
+
 end
