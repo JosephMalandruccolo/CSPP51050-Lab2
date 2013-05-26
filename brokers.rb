@@ -16,8 +16,16 @@ class Broker
 		"#{message.type}#{DELIMTER}#{message.value}"
 	end
 
+
+	# => convert a byte stream to a call message object
 	def call_message_from_byte_stream stream
-		# => reverse of the above
+		stream_params = stream.split DELIMTER
+		cm = CallMessage.new
+		cm.type = stream_params[0]
+		cm.value = stream_params[1]
+
+		cm
+
 	end
 
 end
@@ -26,7 +34,7 @@ end
 
 class ServerBroker < Broker
 
-
+	
 
 
 

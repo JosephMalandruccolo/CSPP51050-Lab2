@@ -3,7 +3,7 @@
 require_relative 'string_counters'
 
 # => class that receives a message from a broker and takes indicated action
-class StringServerProxy
+class ServerProxy
 
 	attr_accessor :ascii_object, :unicode_object
 
