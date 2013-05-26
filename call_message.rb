@@ -7,6 +7,7 @@ class CallMessage
 	# => CONSTANTS
 	UNICODE_TYPE = "unicode"
 	ASCII_TYPE = "ascii"
+	ADD = "add"
 
 	TYPE_WHITELIST = [UNICODE_TYPE, ASCII_TYPE]
 

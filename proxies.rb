@@ -2,6 +2,7 @@
 # Lab 2 - CSPP 51050
 require_relative 'string_counters'
 require_relative 'call_message'
+require_relative 'integer_adders'
 
 # => class that receives a message from a broker and takes indicated action
 class ServerProxy
@@ -17,6 +18,7 @@ class ServerProxy
 
 		@ascii_object = AsciiCounter.new
 		@unicode_object = UnicodeCounter.new
+		@integer_adder = Adder.new
 		
 	end
 
@@ -34,6 +36,12 @@ class ServerProxy
 		elsif string_type.eql? CallMessage::UNICODE_TYPE
 			call_message.result = @unicode_object.frequency string_value
 
+		elsif string_type.eql? CallMessage::ADD
+			string_value.gsub!('[', '')
+			string_value.gsub!(']', '')
+			string_value.gsub!(' ', '')
+			nums = string_value.split(',')
+			call_message.result = @integer_adder.add nums[0], nums[1]
 		else
 			raise "invalid string type"
 
@@ -62,6 +70,17 @@ class ClientProxy
 
 		response_message.result
 		
+	end
+
+
+	def add num1, num2
+		data_type = CallMessage::ADD
+		nums = [num1, num2]
+		call_message = CallMessage.new(data_type, nums)
+		response_message = @client_broker.invoke_message(call_message)
+
+		response_message.result
+
 	end
 
 

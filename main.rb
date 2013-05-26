@@ -18,3 +18,12 @@ end
 
 client = setup
 puts client.character_frequency "hello"
+
+puts client.add 3, 4
+
+
+#cm = CallMessage.new(CallMessage::ADD, [3,4])
+#sa = ServerBroker.new
+#bytes = sa.byte_stream_from_call_message cm
+#message = sa.call_message_from_byte_stream bytes
+#puts message.value
