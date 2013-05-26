@@ -17,13 +17,13 @@ def setup
 end
 
 client = setup
+
+# => test unicode and ascii strings
+# => this replaces the str.length method indicated in the instructions
 puts client.character_frequency "hello"
+puts client.character_frequency "hello\u0639"
 
+# => test numbers of varying digits
 puts client.add 3, 4
-
-
-#cm = CallMessage.new(CallMessage::ADD, [3,4])
-#sa = ServerBroker.new
-#bytes = sa.byte_stream_from_call_message cm
-#message = sa.call_message_from_byte_stream bytes
-#puts message.value
+puts client.add 99, 400
+puts client.add 999, 1000
